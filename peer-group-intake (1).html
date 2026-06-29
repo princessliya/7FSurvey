@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Help Shape Your Peer Group Experience — 7 Figure MSP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f4f1;
+    --surface: #ffffff;
+    --border: #e0ddd6;
+    --border-strong: #c8c4bc;
+    --text-primary: #1a1916;
+    --text-secondary: #5c5a55;
+    --text-muted: #9a9790;
+    --accent: #1e5fd4;
+    --accent-bg: #eef3fd;
+    --accent-border: #b3c9f5;
+    --accent-text: #1040a0;
+    --danger: #c0392b;
+    --danger-bg: #fdf0ee;
+    --success: #1a7a4a;
+    --success-bg: #edfaf3;
+    --radius: 8px;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page-header {
+    max-width: 640px;
+    margin: 0 auto 2rem;
+  }
+
+  .page-header .brand {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header h1 {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .page-header p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .card {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+
+  /* Progress */
+  .progress-wrap { margin-bottom: 2rem; }
+  .progress-track {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* Sections */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .section-heading {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .section-sub {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 1.75rem;
+    line-height: 1.5;
+  }
+
+  /* Fields */
+  .field { margin-bottom: 1.5rem; }
+
+  .field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .field .hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .req { color: var(--danger); margin-left: 2px; }
+
+  .max-note {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+
+  /* Inputs */
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-family: var(--font);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background: #fff;
+    color: var(--text-primary);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    appearance: none;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(30, 95, 212, 0.1);
+  }
+
+  textarea {
+    min-height: 90px;
+    resize: vertical;
+    line-height: 1.5;
+  }
+
+  /* Pills */
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pill {
+    padding: 7px 14px;
+    font-size: 13px;
+    font-family: var(--font);
+    border-radius: 20px;
+    border: 1px solid var(--border-strong);
+    background: #fff;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+    line-height: 1.3;
+  }
+
+  .pill:hover {
+    border-color: var(--accent);
+    color: var(--text-primary);
+  }
+
+  .pill.selected {
+    background: var(--accent-bg);
+    border-color: var(--accent-border);
+    color: var(--accent-text);
+    font-weight: 500;
+  }
+
+  .other-input {
+    display: none;
+    margin-top: 8px;
+  }
+
+  /* Availability grid */
+  .avail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .avail-pill {
+    padding: 10px 14px;
+    font-size: 13px;
+    font-family: var(--font);
+    border-radius: var(--radius);
+    border: 1px solid var(--border-strong);
+    background: #fff;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: left;
+  }
+
+  .avail-pill:hover {
+    border-color: var(--accent);
+    color: var(--text-primary);
+  }
+
+  .avail-pill.selected {
+    background: var(--accent-bg);
+    border-color: var(--accent-border);
+    color: var(--accent-text);
+    font-weight: 500;
+  }
+
+  .avail-pill.full-width { grid-column: span 2; }
+
+  .tz-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .tz-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+
+  /* Two-col layout */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  @media (max-width: 480px) {
+    .two-col { grid-template-columns: 1fr; }
+    .avail-grid { grid-template-columns: 1fr; }
+    .avail-pill.full-width { grid-column: span 1; }
+  }
+
+  /* Errors */
+  .error {
+    font-size: 12px;
+    color: var(--danger);
+    margin-top: 5px;
+    display: none;
+  }
+
+  .field.has-error input,
+  .field.has-error textarea {
+    border-color: var(--danger);
+  }
+
+  .field.has-error .error { display: block; }
+
+  /* Nav */
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .btn {
+    padding: 9px 22px;
+    font-size: 14px;
+    font-family: var(--font);
+    font-weight: 500;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.15s;
+    border: none;
+  }
+
+  .btn-back {
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    color: var(--text-secondary);
+  }
+
+  .btn-back:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+  }
+
+  .btn-next {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .btn-next:hover { background: #1a52bb; }
+  .btn-next:active { transform: scale(0.98); }
+
+  /* Confirmation */
+  .confirm {
+    text-align: center;
+    padding: 2.5rem 0 1rem;
+  }
+
+  .confirm-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--success-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+  }
+
+  .confirm-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--success);
+    stroke-width: 2.5;
+    fill: none;
+  }
+
+  .confirm h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .confirm p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  /* Thank you data summary */
+  .summary {
+    margin-top: 2rem;
+    background: var(--bg);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    text-align: left;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    display: none;
+  }
+
+  .summary strong {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.5rem 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="brand">7 Figure MSP</div>
+  <h1>Help shape your peer group experience</h1>
+  <p>We're exploring smaller, more focused peer groups to help members make progress through accountability, shared experience, and practical support. This form takes about 5–7 minutes.</p>
+</div>
+
+<div class="card">
+  <div class="progress-wrap">
+    <div class="progress-track">
+      <div class="progress-fill" id="prog" style="width: 33%"></div>
+    </div>
+    <div class="progress-meta">
+      <span id="prog-label">Section 1 of 3 — About you</span>
+      <span id="prog-pct">33%</span>
+    </div>
+  </div>
+
+  <!-- ─── Section 1: About You ─── -->
+  <div class="section active" id="s1">
+    <div class="section-heading">About you</div>
+    <div class="section-sub">A few basics to help us match you with the right group.</div>
+
+    <div class="field" id="f-name">
+      <label>Full name <span class="req">*</span></label>
+      <input type="text" id="name" placeholder="Jane Smith" autocomplete="name" />
+      <div class="error">Please enter your name.</div>
+    </div>
+
+    <div class="field" id="f-email">
+      <label>Email address <span class="req">*</span></label>
+      <input type="email" id="email" placeholder="jane@company.com" autocomplete="email" />
+      <div class="error">Please enter a valid email address.</div>
+    </div>
+
+    <div class="field" id="f-company">
+      <label>Company name <span class="req">*</span></label>
+      <input type="text" id="company" placeholder="Acme IT" autocomplete="organization" />
+      <div class="error">Please enter your company name.</div>
+    </div>
+
+    <div class="field" id="f-market">
+      <label>City, state, or primary market <span class="req">*</span></label>
+      <input type="text" id="market" placeholder="Austin, TX" />
+      <div class="error">Please enter your primary market.</div>
+    </div>
+
+    <div class="two-col">
+      <div class="field" id="f-mrr-start">
+        <label>MRR when you joined <span class="req">*</span></label>
+        <div class="hint">A best estimate is fine.</div>
+        <input type="text" id="mrr-start" placeholder="e.g. $15,000" />
+        <div class="error">Required.</div>
+      </div>
+      <div class="field" id="f-mrr-now">
+        <label>MRR today <span class="req">*</span></label>
+        <div class="hint">A best estimate is fine.</div>
+        <input type="text" id="mrr-now" placeholder="e.g. $28,000" />
+        <div class="error">Required.</div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <span></span>
+      <button class="btn btn-next" onclick="goNext(1)">Next →</button>
+    </div>
+  </div>
+
+  <!-- ─── Section 2: Peer Group Goals ─── -->
+  <div class="section" id="s2">
+    <div class="section-heading">What you want from a peer group</div>
+    <div class="section-sub">Help us understand your goals and what would make this genuinely valuable.</div>
+
+    <div class="field" id="f-goals">
+      <label>What would you most want a peer group to help you accomplish over the next 90 days? <span class="req">*</span></label>
+      <div class="max-note">Select up to 2</div>
+      <div class="pills" id="goals" data-max="2">
+        <button class="pill" data-val="Generate more qualified leads">Generate more qualified leads</button>
+        <button class="pill" data-val="Build a more consistent marketing rhythm">Build a consistent marketing rhythm</button>
+        <button class="pill" data-val="Improve sales conversations and close more deals">Improve sales conversations and close more deals</button>
+        <button class="pill" data-val="Follow up with opportunities more effectively">Follow up with opportunities more effectively</button>
+        <button class="pill" data-val="Retain and strengthen client relationships">Retain and strengthen client relationships</button>
+        <button class="pill" data-val="Conduct SBRs or strategic business reviews">Conduct SBRs or strategic business reviews</button>
+        <button class="pill" data-val="Upgrade or expand services for existing clients">Upgrade or expand services for existing clients</button>
+        <button class="pill" data-val="Clarify, package, or sell an AI advisory offer">Clarify or sell an AI advisory offer</button>
+        <button class="pill" data-val="Improve leadership or operations">Improve leadership or operations</button>
+        <button class="pill" data-val="Strengthen team accountability and execution">Strengthen team accountability</button>
+        <button class="pill" data-val="Restart after feeling stuck or overwhelmed">Restart after feeling stuck or overwhelmed</button>
+        <button class="pill" data-val="Identify what I should focus on first">Identify what I should focus on first</button>
+        <button class="pill other-pill" data-val="other-goals">Other</button>
+      </div>
+      <input type="text" class="other-input" id="goals-other" placeholder="Tell us more..." />
+      <div class="error">Please select at least one.</div>
+    </div>
+
+    <div class="field" id="f-result">
+      <label>What specific result would make the next 90 days feel successful? <span class="req">*</span></label>
+      <div class="hint">e.g. Schedule 10 qualified appointments, close three new clients, complete SBRs with 80% of clients, or launch one consistent campaign.</div>
+      <textarea id="result" placeholder="Describe your 90-day target..."></textarea>
+      <div class="error">Please describe your target result.</div>
+    </div>
+
+    <div class="field" id="f-wants">
+      <label>What would you most want from the peer group experience? <span class="req">*</span></label>
+      <div class="max-note">Select up to 3</div>
+      <div class="pills" id="wants" data-max="3">
+        <button class="pill" data-val="Accountability and follow-through">Accountability and follow-through</button>
+        <button class="pill" data-val="A clear action plan">A clear action plan</button>
+        <button class="pill" data-val="Feedback on real business challenges">Feedback on real business challenges</button>
+        <button class="pill" data-val="Help working through deals, campaigns, or client situations">Help working through deals and campaigns</button>
+        <button class="pill" data-val="Ideas and examples from other members">Ideas and examples from other members</button>
+        <button class="pill" data-val="Honest conversations with other business owners">Honest conversations with other owners</button>
+        <button class="pill" data-val="Expert guidance when needed">Expert guidance when needed</button>
+        <button class="pill" data-val="Templates, scripts, or resources">Templates, scripts, or resources</button>
+        <button class="pill" data-val="Stronger relationships with other members">Stronger relationships with other members</button>
+        <button class="pill" data-val="Help deciding what to prioritize">Help deciding what to prioritize</button>
+        <button class="pill other-pill" data-val="other-wants">Other</button>
+      </div>
+      <input type="text" class="other-input" id="wants-other" placeholder="Tell us more..." />
+      <div class="error">Please select at least one.</div>
+    </div>
+
+    <div class="field" id="f-style">
+      <label>Which meeting style would be most valuable to you? <span class="req">*</span></label>
+      <div class="pills" id="style" data-max="1">
+        <button class="pill" data-val="Structured accountability and progress check-ins">Structured accountability check-ins</button>
+        <button class="pill" data-val="Member hot seats focused on current challenges">Member hot seats</button>
+        <button class="pill" data-val="Working sessions where we complete actions together">Working sessions</button>
+        <button class="pill" data-val="Peer roundtable and shared problem-solving">Peer roundtable</button>
+        <button class="pill" data-val="Deal, campaign, or client reviews">Deal / campaign / client reviews</button>
+        <button class="pill" data-val="Expert teaching and Q&A">Expert teaching and Q&amp;A</button>
+        <button class="pill" data-val="A mix of accountability, peer discussion, and expert support">A mix of all of the above</button>
+        <button class="pill other-pill" data-val="other-style">Other</button>
+      </div>
+      <input type="text" class="other-input" id="style-other" placeholder="Tell us more..." />
+      <div class="error">Please select one.</div>
+    </div>
+
+    <div class="field" id="f-groupwith">
+      <label>What type of members would you benefit most from being grouped with? <span class="req">*</span></label>
+      <div class="max-note">Select up to 2</div>
+      <div class="pills" id="groupwith" data-max="2">
+        <button class="pill" data-val="Members working toward a similar goal">Members working toward a similar goal</button>
+        <button class="pill" data-val="Businesses at a similar revenue or growth stage">Businesses at a similar revenue stage</button>
+        <button class="pill" data-val="Businesses slightly ahead of mine">Businesses slightly ahead of mine</button>
+        <button class="pill" data-val="Other owners and CEOs">Other owners and CEOs</button>
+        <button class="pill" data-val="Team members responsible for a similar function">Similar functional roles</button>
+        <button class="pill" data-val="Members with different strengths who can challenge my thinking">Different strengths / diverse perspectives</button>
+        <button class="pill" data-val="Members in different geographic markets">Different geographic markets</button>
+        <button class="pill" data-val="I'm open to the team's recommendation">Open to the team's recommendation</button>
+        <button class="pill other-pill" data-val="other-groupwith">Other</button>
+      </div>
+      <input type="text" class="other-input" id="groupwith-other" placeholder="Tell us more..." />
+      <div class="error">Please select at least one.</div>
+    </div>
+
+    <div class="field" id="f-worth">
+      <label>Imagine the group has been running for 90 days. What would need to have happened for you to say, "This was worth my time"? <span class="req">*</span></label>
+      <textarea id="worth" placeholder="Describe what success looks like..."></textarea>
+      <div class="error">Please share what success looks like for you.</div>
+    </div>
+
+    <div class="nav">
+      <button class="btn btn-back" onclick="goBack(2)">← Back</button>
+      <button class="btn btn-next" onclick="goNext(2)">Next →</button>
+    </div>
+  </div>
+
+  <!-- ─── Section 3: Participation ─── -->
+  <div class="section" id="s3">
+    <div class="section-heading">Participation and logistics</div>
+    <div class="section-sub">Help us match you with a group that fits your schedule and situation.</div>
+
+    <div class="field" id="f-who">
+      <label>Who from your company should primarily participate? <span class="req">*</span></label>
+      <div class="pills" id="who" data-max="1">
+        <button class="pill" data-val="Me, as the owner or primary leader">Me, as the owner or primary leader</button>
+        <button class="pill" data-val="Me, together with a team member">Me, together with a team member</button>
+        <button class="pill" data-val="A sales team member or sales leader">A sales team member</button>
+        <button class="pill" data-val="A marketing team member">A marketing team member</button>
+        <button class="pill" data-val="An account management or client success team member">Account management / client success</button>
+        <button class="pill" data-val="An operations leader">An operations leader</button>
+        <button class="pill" data-val="Another member of my team">Another team member</button>
+        <button class="pill" data-val="It depends on the group's focus">Depends on the group's focus</button>
+        <button class="pill" data-val="I'm not sure yet">Not sure yet</button>
+      </div>
+      <div class="error">Please select one.</div>
+    </div>
+
+    <div class="field" id="f-freq">
+      <label>How often could you realistically participate? <span class="req">*</span></label>
+      <div class="pills" id="freq" data-max="1">
+        <button class="pill" data-val="Weekly">Weekly</button>
+        <button class="pill" data-val="Every other week">Every other week</button>
+        <button class="pill" data-val="Monthly">Monthly</button>
+        <button class="pill" data-val="My availability varies">My availability varies</button>
+        <button class="pill" data-val="I'm not currently able to commit consistently">Can't commit consistently right now</button>
+      </div>
+      <div class="error">Please select one.</div>
+    </div>
+
+    <div class="field" id="f-avail">
+      <label>When are you generally available? <span class="req">*</span></label>
+      <div class="avail-grid" id="avail">
+        <button class="avail-pill" data-val="Weekday mornings">Weekday mornings</button>
+        <button class="avail-pill" data-val="Weekday afternoons">Weekday afternoons</button>
+        <button class="avail-pill" data-val="Weekday late afternoons">Weekday late afternoons</button>
+        <button class="avail-pill" data-val="Weekday evenings">Weekday evenings</button>
+        <button class="avail-pill full-width" data-val="I'm flexible">I'm flexible</button>
+      </div>
+      <div class="tz-row">
+        <span class="tz-label">Time zone:</span>
+        <input type="text" id="timezone" placeholder="e.g. Eastern, CST, PST" style="max-width: 220px;" />
+      </div>
+      <div class="error">Please select at least one time slot.</div>
+    </div>
+
+    <div class="field">
+      <label>Any competitors, scheduling concerns, or other factors we should consider? <span style="font-size: 12px; color: var(--text-muted); font-weight: 400;">(optional)</span></label>
+      <textarea id="concerns" placeholder="e.g. We compete directly with ABC IT — prefer not to be grouped with them..."></textarea>
+    </div>
+
+    <div class="nav">
+      <button class="btn btn-back" onclick="goBack(3)">← Back</button>
+      <button class="btn btn-next" onclick="submitForm()">Submit</button>
+    </div>
+  </div>
+
+  <!-- ─── Confirmation ─── -->
+  <div class="section" id="s4">
+    <div class="confirm">
+      <div class="confirm-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h2>Thank you for sharing your feedback.</h2>
+      <p>We'll use your responses, along with what we already know about your business, to shape the peer groups and recommend the support approach that best fits your goals. We'll follow up soon with next steps.</p>
+    </div>
+    <div class="summary" id="summary"></div>
+  </div>
+</div>
+
+<script>
+  var currentSection = 1;
+
+  var sectionMeta = [
+    null,
+    { label: 'Section 1 of 3 — About you', pct: 33 },
+    { label: 'Section 2 of 3 — Goals and preferences', pct: 66 },
+    { label: 'Section 3 of 3 — Participation and logistics', pct: 100 },
+    { label: 'Complete', pct: 100 },
+  ];
+
+  function showSection(n) {
+    document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+    document.getElementById('s' + n).classList.add('active');
+    currentSection = n;
+    var meta = sectionMeta[n] || sectionMeta[4];
+    document.getElementById('prog').style.width = meta.pct + '%';
+    document.getElementById('prog-label').textContent = meta.label;
+    document.getElementById('prog-pct').textContent = meta.pct + '%';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function goBack(from) { showSection(from - 1); }
+  function goNext(from) { if (validateSection(from)) showSection(from + 1); }
+
+  /* ── Validation ── */
+  function validateSection(n) {
+    var ok = true;
+    if (n === 1) {
+      ok = chkText('name', 'f-name') & ok;
+      ok = chkEmail('email', 'f-email') & ok;
+      ok = chkText('company', 'f-company') & ok;
+      ok = chkText('market', 'f-market') & ok;
+      ok = chkText('mrr-start', 'f-mrr-start') & ok;
+      ok = chkText('mrr-now', 'f-mrr-now') & ok;
+    }
+    if (n === 2) {
+      ok = chkPills('goals', 'f-goals') & ok;
+      ok = chkTA('result', 'f-result') & ok;
+      ok = chkPills('wants', 'f-wants') & ok;
+      ok = chkPills('style', 'f-style') & ok;
+      ok = chkPills('groupwith', 'f-groupwith') & ok;
+      ok = chkTA('worth', 'f-worth') & ok;
+    }
+    if (n === 3) {
+      ok = chkPills('who', 'f-who') & ok;
+      ok = chkPills('freq', 'f-freq') & ok;
+      ok = chkAvail('f-avail') & ok;
+    }
+    return !!ok;
+  }
+
+  function chkText(id, fid) {
+    var v = document.getElementById(id).value.trim();
+    var f = document.getElementById(fid);
+    if (!v) { f.classList.add('has-error'); return false; }
+    f.classList.remove('has-error'); return true;
+  }
+
+  function chkEmail(id, fid) {
+    var v = document.getElementById(id).value.trim();
+    var f = document.getElementById(fid);
+    var valid = v && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    if (!valid) { f.classList.add('has-error'); return false; }
+    f.classList.remove('has-error'); return true;
+  }
+
+  function chkTA(id, fid) {
+    var v = document.getElementById(id).value.trim();
+    var f = document.getElementById(fid);
+    if (!v) { f.classList.add('has-error'); return false; }
+    f.classList.remove('has-error'); return true;
+  }
+
+  function chkPills(groupId, fid) {
+    var sel = document.querySelectorAll('#' + groupId + ' .pill.selected');
+    var f = document.getElementById(fid);
+    if (!sel.length) { f.classList.add('has-error'); return false; }
+    f.classList.remove('has-error'); return true;
+  }
+
+  function chkAvail(fid) {
+    var sel = document.querySelectorAll('#avail .avail-pill.selected');
+    var f = document.getElementById(fid);
+    if (!sel.length) { f.classList.add('has-error'); return false; }
+    f.classList.remove('has-error'); return true;
+  }
+
+  /* ── Pill interactions ── */
+  document.querySelectorAll('.pills').forEach(function(group) {
+    var max = parseInt(group.dataset.max) || 99;
+    group.querySelectorAll('.pill').forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        var isSelected = pill.classList.contains('selected');
+        var count = group.querySelectorAll('.pill.selected').length;
+        if (!isSelected && count >= max) {
+          var first = group.querySelector('.pill.selected');
+          if (first) first.classList.remove('selected');
+        }
+        pill.classList.toggle('selected');
+        // show/hide other input
+        if (pill.classList.contains('other-pill')) {
+          var otherId = group.id + '-other';
+          var otherEl = document.getElementById(otherId);
+          if (otherEl) otherEl.style.display = pill.classList.contains('selected') ? 'block' : 'none';
+        }
+        // clear error
+        var fid = 'f-' + group.id;
+        var field = document.getElementById(fid);
+        if (field) field.classList.remove('has-error');
+      });
+    });
+  });
+
+  document.querySelectorAll('.avail-pill').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      pill.classList.toggle('selected');
+      document.getElementById('f-avail').classList.remove('has-error');
+    });
+  });
+
+  /* ── Collect responses ── */
+  function getVal(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+
+  function getPills(groupId) {
+    var vals = [];
+    document.querySelectorAll('#' + groupId + ' .pill.selected').forEach(function(p) {
+      var v = p.dataset.val || '';
+      if (v.indexOf('other-') === 0) {
+        var otherId = groupId + '-other';
+        var otherEl = document.getElementById(otherId);
+        var txt = otherEl ? otherEl.value.trim() : '';
+        vals.push(txt ? 'Other: ' + txt : 'Other');
+      } else if (v) {
+        vals.push(v);
+      }
+    });
+    return vals.join(', ') || '—';
+  }
+
+  function getAvail() {
+    var vals = [];
+    document.querySelectorAll('#avail .avail-pill.selected').forEach(function(p) { vals.push(p.dataset.val); });
+    return vals.join(', ') || '—';
+  }
+
+  /* ── Submit ── */
+
+  // ✏️  Paste your Apps Script web app URL here after deploying
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw0sATOtlNijUcUGYQ_og2i37idEdQFKtF6G0MqTCGdzF3Xzmw_bZQMs0NEWy7OvuM1lg/exec';
+
+  function submitForm() {
+    if (!validateSection(3)) return;
+
+    var rows = [
+      ['Name',              getVal('name')],
+      ['Email',             getVal('email')],
+      ['Company',           getVal('company')],
+      ['Market',            getVal('market')],
+      ['MRR at Join',       getVal('mrr-start')],
+      ['MRR Today',         getVal('mrr-now')],
+      ['90-Day Goals',      getPills('goals')],
+      ['Target Result',     getVal('result')],
+      ['Wants From Group',  getPills('wants')],
+      ['Meeting Style',     getPills('style')],
+      ['Group With',        getPills('groupwith')],
+      ['Worth It If',       getVal('worth')],
+      ['Who Participates',  getPills('who')],
+      ['Frequency',         getPills('freq')],
+      ['Availability',      getAvail()],
+      ['Time Zone',         getVal('timezone') || ''],
+      ['Concerns',          getVal('concerns') || ''],
+    ];
+
+    // Build payload object
+    var payload = {};
+    rows.forEach(function(row) { payload[row[0]] = row[1]; });
+
+    // Show confirmation immediately (no-cors means we can't read the response)
+    var html = '<strong style="display:block; margin-bottom: 0.5rem;">Your responses</strong>';
+    rows.forEach(function(row) {
+      if (row[1] && row[1] !== '—') {
+        html += '<div><strong>' + row[0] + ':</strong> ' + escHtml(row[1]) + '</div>';
+      }
+    });
+    var summaryEl = document.getElementById('summary');
+    summaryEl.innerHTML = html;
+    summaryEl.style.display = 'block';
+
+    showSection(4);
+
+    // Send to Google Apps Script
+    if (SCRIPT_URL && SCRIPT_URL !== 'YOUR_APPS_SCRIPT_WEB_APP_URL_HERE') {
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // required for Apps Script web apps
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(function(err) {
+        console.warn('Submission error:', err);
+      });
+    } else {
+      console.log('⚠️  No SCRIPT_URL set. Payload:', JSON.stringify(payload, null, 2));
+    }
+  }
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+</script>
+</body>
+</html>
